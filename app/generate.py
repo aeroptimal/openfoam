@@ -35,8 +35,8 @@ def write_files():
 def get_request():
 	import time
 	t0 = time.time()
-	MeshGen.MeshPreview()
-	print(f"Elapsed time: {t0 - time.time()}")
+	# MeshGen.MeshPreview()
+	# print(f"Elapsed time: {t0 - time.time()}")
 	params = MeshGen.GetMeshParams()
 	print(f"Elapsed time: {t0 - time.time()}")
 	MeshGen.Convert2Su2()
@@ -58,16 +58,16 @@ def post_request(data):
 	file2 = open('/home/foam/OpenFOAM/-7/run/VTK.zip','rb')
 	file3 = open('/home/foam/OpenFOAM/-7/run/su2.zip','rb')
 	file4 = open('/home/foam/OpenFOAM/-7/run/Mesh.zip','rb')
-	file5 = open('/home/foam/OpenFOAM/-7/run/cercana.png','rb')
-	file6 = open('/home/foam/OpenFOAM/-7/run/lejana.png','rb')
+	# file5 = open('/home/foam/OpenFOAM/-7/run/cercana.png','rb')
+	# file6 = open('/home/foam/OpenFOAM/-7/run/lejana.png','rb')
 
 	data['files'] = {
 		"msh": base64.b64encode(file1.read()).decode("utf-8"),
 		"vtk": base64.b64encode(file2.read()).decode("utf-8"),
 		"su2": base64.b64encode(file3.read()).decode("utf-8"),
 		"foam": base64.b64encode(file4.read()).decode("utf-8"),
-		"cercana": base64.b64encode(file5.read()).decode("utf-8"),
-		"lejana": base64.b64encode(file6.read()).decode("utf-8"),
+		# "cercana": base64.b64encode(file5.read()).decode("utf-8"),
+		# "lejana": base64.b64encode(file6.read()).decode("utf-8"),
 	}
 
 	requests.post(f"{settings.HOST}/mesh/result/{id}",
@@ -78,8 +78,8 @@ def post_request(data):
 	file2.close()
 	file3.close()
 	file4.close()
-	file5.close()
-	file6.close()
+	# file5.close()
+	# file6.close()
 
 if __name__ == '__main__':
 	data = get_request()
