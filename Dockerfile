@@ -18,8 +18,6 @@ RUN mkdir -p /home/foam/OpenFOAM/-7/run
 
 COPY . .
 
-WORKDIR /app
-
 RUN sudo chmod -R 777 templateFolder/* \
     && pip3 install --upgrade pip \
     && pip3 install -r requirements.txt
