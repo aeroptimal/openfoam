@@ -1,0 +1,111 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1912                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+	
+	
+	{
+        name    boundaries;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+		{
+		 name auto3;
+		}	
+        
+    }
+	
+	
+	{
+        name    outlet_patch_negative;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+		{
+		  box (0.5 -200 -2) (200 200 2);
+		}
+		       
+    }
+	
+	{
+        name    inlet_patch_negative;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+		{
+	      box (-200 -200 -2) (0.5 200 2);
+		}
+	}	    
+	
+	//create  
+	{
+        name    inlet;
+        type    faceSet;
+        action  new;
+        source  faceToFace;
+        sourceInfo
+		{
+		  set boundaries;
+		}
+		       
+    }
+	
+	{
+        name    inlet;
+        type    faceSet;
+        action  delete;
+        source  faceToFace;
+        sourceInfo
+		{
+		  set  outlet_patch_negative;
+		}
+		       
+    }
+	
+	
+	//create  
+	{
+        name    outlet;
+        type    faceSet;
+        action  new;
+        source  faceToFace;
+        sourceInfo
+		{
+		  set boundaries;
+		}
+		       
+    }
+	
+	
+	{
+        name    outlet;
+        type    faceSet;
+        action  delete;
+        source  faceToFace;
+        sourceInfo
+		{
+		  set  inlet_patch_negative;
+		}
+		       
+    }
+			
+);
+
+// ************************************************************************* //

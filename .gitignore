@@ -1,0 +1,10 @@
+*.pdf
+!*.py
+env/
+venv/
+__pycache__/
+*.db
+package-lock.json
+package.json
+node_modules/
+.env

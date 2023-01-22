@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: openfoam
+  name: openfoam
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openfoam
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: openfoam
+    spec:
+      containers:
+      - image: ghcr.io/aeroptimal/openfoam@__tag__
+        imagePullPolicy: Always
+        name: openfoam
+        envFrom:
+        - configMapRef: 
+            name: default
+        resources: 
+          limits: 
+            memory: 512Mi
+            cpu: "600m"
+          requests:
+            memory: 32Mi
+            cpu: "10m"
+        env:
+          - name: DPLY_VERSION
+            value: "__tag__"
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: aeroptimalcr
