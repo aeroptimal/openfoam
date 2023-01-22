@@ -10,13 +10,15 @@ ADD https://www.paraview.org/paraview-downloads/download.php?submit=Download&ver
 # RUN sudo ln -s /opt/paraview-5.9/bin/paraview /usr/bin/paraview ;\
 # 	sudo ln -s /opt/paraview-5.9/lib/paraview-5.9/  /usr/lib/paraview-5.9
 
+WORKDIR /
+
 USER foam
 
 RUN mkdir -p /home/foam/OpenFOAM/-7/run
 
-WORKDIR /app
-
 COPY . .
+
+WORKDIR /app
 
 RUN sudo chmod -R 777 templateFolder/*
 RUN sudo pip3 install -r requirements.txt
