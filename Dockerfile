@@ -21,8 +21,7 @@ COPY . .
 WORKDIR /app
 
 RUN sudo chmod -R 777 templateFolder/* \
-    && pip3 install --upgrade pip
-
-RUN sudo pip3 install -r requirements.txt
+    && pip3 install --upgrade pip \
+    && pip3 install -r requirements.txt
 
 CMD ["bash","-i","job.sh"]
