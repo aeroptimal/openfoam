@@ -1,6 +1,6 @@
 FROM ghcr.io/aeroptimal/openfoam-base:latest
 
-ADD https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.9&type=binary&os=Linux&downloadFile=ParaView-5.9.0-osmesa-MPI-Linux-Python3.8-64bit.tar.gz /opt/paraview.tar.gz
+# ADD https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.9&type=binary&os=Linux&downloadFile=ParaView-5.9.0-osmesa-MPI-Linux-Python3.8-64bit.tar.gz /opt/paraview.tar.gz
 
 # WORKDIR /opt
 
