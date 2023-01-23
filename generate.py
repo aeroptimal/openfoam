@@ -5,6 +5,9 @@ import base64
 import os
 from zipfile import ZipFile
 import requests
+import redis
+
+r = redis.Redis(host='redis', port=6379, db=0)
 
 def write_zip(zipobj : ZipFile,current_folder,foldername):
     dir_list = os.listdir(current_folder+foldername)
@@ -61,6 +64,11 @@ def post_request(data):
 	# file5 = open('/home/foam/OpenFOAM/-7/run/cercana.png','rb')
 	# file6 = open('/home/foam/OpenFOAM/-7/run/lejana.png','rb')
 
+	r.setex(f"msh:{id}", 120, base64.b64encode(file1.read()).decode("utf-8"))
+	r.setex(f"vtk:{id}", 120, base64.b64encode(file2.read()).decode("utf-8"))
+	r.setex(f"su2:{id}", 120, base64.b64encode(file3.read()).decode("utf-8"))
+	r.setex(f"mesh:{id}", 120, base64.b64encode(file4.read()).decode("utf-8"))
+	
 	data['files'] = {
 		"msh": base64.b64encode(file1.read()).decode("utf-8"),
 		"vtk": base64.b64encode(file2.read()).decode("utf-8"),
