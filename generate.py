@@ -69,14 +69,14 @@ def post_request(data):
 	r.setex(f"su2:{id}", 120, base64.b64encode(file3.read()).decode("utf-8"))
 	r.setex(f"mesh:{id}", 120, base64.b64encode(file4.read()).decode("utf-8"))
 	
-	data['files'] = {
-		"msh": base64.b64encode(file1.read()).decode("utf-8"),
-		"vtk": base64.b64encode(file2.read()).decode("utf-8"),
-		"su2": base64.b64encode(file3.read()).decode("utf-8"),
-		"foam": base64.b64encode(file4.read()).decode("utf-8"),
-		# "cercana": base64.b64encode(file5.read()).decode("utf-8"),
-		# "lejana": base64.b64encode(file6.read()).decode("utf-8"),
-	}
+	# data['files'] = {
+	# 	"msh": base64.b64encode(file1.read()).decode("utf-8"),
+	# 	"vtk": base64.b64encode(file2.read()).decode("utf-8"),
+	# 	"su2": base64.b64encode(file3.read()).decode("utf-8"),
+	# 	"foam": base64.b64encode(file4.read()).decode("utf-8"),
+	# 	# "cercana": base64.b64encode(file5.read()).decode("utf-8"),
+	# 	# "lejana": base64.b64encode(file6.read()).decode("utf-8"),
+	# }
 
 	requests.post(f"{settings.HOST}/mesh/result/{id}",
 		json=data,
